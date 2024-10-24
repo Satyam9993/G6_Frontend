@@ -1,8 +1,8 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm.jsx';
-import Register from '../components/Register';
+import Register from '../components/Register.jsx';
 
-const LoginAndRegister = () => {
+const LoginPage = () => {
     const token = false;
     return (
         <>
@@ -10,12 +10,10 @@ const LoginAndRegister = () => {
                 <div className="w-1/2 h-screen hidden lg:block">
                     <img src="https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7883.jpg?t=st=1729782666~exp=1729786266~hmac=ae07c5ca8f665f8b72ebef2c603f4551068044f6dd15bc4df9ca1112f13aa9b4&w=740" alt="Placeholder Image" className="object-cover w-full h-full" />
                 </div>
-                {token == false ?    
-                    <LoginForm /> : <Register/>
-                }
+                    <LoginForm /> 
             </div>
         </>
     )
 }
 
-export default LoginAndRegister
+export default LoginPage

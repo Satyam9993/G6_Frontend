@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   return (
@@ -24,7 +25,7 @@ const LoginForm = () => {
           <button type="submit" className="bg-red-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">Login</button>
         </form>
         <div className="mt-6 text-green-500 text-center">
-          <a href="#" className="hover:underline">Sign up Here</a>
+          <Link to="/register" className="hover:underline">Sign up Here</Link>
         </div>
       </div>
     </>

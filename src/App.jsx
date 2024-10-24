@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import Login from './pages/LoginAndRegister.jsx'
+import React, { useState } from 'react';
+import LoginPage from './pages/LoginPage.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage.jsx';
-import ProtectedRoute from './utils/ProtectedRoute.jsx';
+import ProtectedRoute from './assets/utils/ProtectedRoute.jsx';
+import RegisterPage from './pages/RegisterPage.jsx';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -12,7 +13,8 @@ const App = () => {
     <Router>
       <Routes>
         {/* Public Pages */}
-        <Route path="/login" element={<Login setAuth={setIsAuthenticated} />} />
+        <Route path="/register" element={<RegisterPage setAuth={setIsAuthenticated} />} />
+        <Route path="/login" element={<LoginPage setAuth={setIsAuthenticated} />} />
         <Route
           path="/"
           element={
