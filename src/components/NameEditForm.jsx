@@ -3,6 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import { CiEdit } from "react-icons/ci";
+import { useSelector } from 'react-redux';
 
 
 const NameSchema = Yup.object().shape({
@@ -12,16 +13,15 @@ const NameSchema = Yup.object().shape({
     .required('Name is required'),
 });
 
-const NameEditForm = () => {
+const NameEditForm = ({updateUserInformation}) => {
   const [isEditing, setIsEditing] = useState(false);
-
+  const username = useSelector(state => state.user.username);
   return (
     <Formik
-      initialValues={{ name: 'Jane Name' }}
+      initialValues={{ name: username }}
       validationSchema={NameSchema}
-      onSubmit={(values) => {
-        // TODO OnSubmit Function
-        console.log(values);
+      onSubmit={async (values) => {
+        await updateUserInformation({username : values.name});
         setIsEditing(false);
       }}
     >

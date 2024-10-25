@@ -11,15 +11,15 @@ const PasswordSchema = Yup.object().shape({
     .required('New password is required'),
 });
 
-const PasswordForm = () => {
+const PasswordForm = ({updateUserInformation}) => {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
     <Formik
       initialValues={{ currentPassword: '', newPassword: '' }}
       validationSchema={PasswordSchema}
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={async (values) => {
+        await updateUserInformation({OldPassword:values.currentPassword, NewPassword:values.newPassword});
         setIsEditing(false);
       }}
     >

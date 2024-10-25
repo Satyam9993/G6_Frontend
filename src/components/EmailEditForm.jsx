@@ -3,22 +3,23 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { FaCheck, FaTimes } from 'react-icons/fa'; // Importing icons
 import { CiEdit } from "react-icons/ci";
+import { useSelector } from 'react-redux';
 const EmailSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email address')
     .required('Email is required'),
 });
 
-const EmailEditForm = () => {
+const EmailEditForm = ({updateUserInformation}) => {
   const [isEditing, setIsEditing] = useState(false);
-
+  const email = useSelector(state => state.user.email);
   return (
     <Formik
-      initialValues={{ email: 'example@example.com' }}
+      initialValues={{ email: email }}
       validationSchema={EmailSchema}
-      onSubmit={(values) => {
-        console.log(values);
-        setIsEditing(false); // Disable editing after submission
+      onSubmit={async (values) => {
+        await updateUserInformation({email : values.email});
+        setIsEditing(false);
       }}
     >
       {({ errors, touched, handleSubmit, handleReset }) => (

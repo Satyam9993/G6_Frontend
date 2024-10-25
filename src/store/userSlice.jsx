@@ -21,6 +21,9 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.username = action.payload.username; 
     },
+    setUserName: (state, action) => {
+      state.username = action.payload.username; 
+    },
   },
 });
 
