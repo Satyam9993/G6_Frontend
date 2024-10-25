@@ -1,12 +1,52 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
+import React, { useEffect } from 'react';
+import Navbar from '../components/Navbar';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { setUserInfo } from '../store/userSlice';
 
 const HomePage = () => {
+  const token = useSelector(state => state.user.token);
+  const BACKEND_URL = "http://localhost:8080/api/v1";
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/getuserinfo`, {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": token
+          }
+        });
+
+        const userData = await response.json();
+        
+        if (userData.success) {
+          console.log(userData.user.email);
+          
+          dispatch(setUserInfo({
+            userId: userData.user._id,
+            email : userData.user.email,
+            username : userData.user.username
+          }));
+        } else {
+          toast.error(userData.message);
+        }
+      } catch (error) {
+        toast.error("Failed to fetch user info");
+      }
+    };
+
+    if (token) {
+      fetchUserInfo();
+    }
+  }, [token]);
+
   return (
     <>
-    <Navbar /> 
+      <Navbar />
     </>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

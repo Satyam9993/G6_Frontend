@@ -14,8 +14,15 @@ const userSlice = createSlice({
       state.userId = action.payload.userId;
       state.token = action.payload.token;
     },
+    setUserInfo: (state, action) => {
+      console.log("email", action.payload.email);
+      
+      state.userId = action.payload.userId;
+      state.email = action.payload.email;
+      state.username = action.payload.username; 
+    },
   },
 });
 
-export const { setToken } = userSlice.actions;
+export const { setToken,setUserInfo } = userSlice.actions;
 export default userSlice.reducer;
