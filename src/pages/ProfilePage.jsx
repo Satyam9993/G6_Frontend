@@ -5,7 +5,7 @@ import PasswordForm from '../components/PasswordFrom'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
-import { setUserInfo } from '../store/userSlice'
+import { setDeleteUser, setUserInfo } from '../store/userSlice'
 
 
 const ProfilePage = () => {
@@ -66,6 +66,34 @@ const ProfilePage = () => {
         }
     };
 
+    const deletUser = async () => {
+        try {
+            const confirm = window.confirm('Are you sure you want to delete');
+            if(!confirm){
+                return;
+            }
+            const response = await fetch(`${BACKEND_URL}/deleteuser`, {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token
+                }
+            });
+
+            const userData = await response.json();
+
+            if (userData.success) {
+                toast.success(userData.message);
+                dispatch(setDeleteUser());
+                navigate("/login")
+            } else {
+                toast.error(userData.message);
+            }
+        } catch (error) {
+            toast.error("Failed to fetch user info");
+        }
+    };
+
     return (
         <>
             <div className='min-h-dvh'>
@@ -82,7 +110,7 @@ const ProfilePage = () => {
                             <NameEditForm updateUserInformation={updateUserInformation} />
                             <EmailEditForm updateUserInformation={updateUserInformation} />
                             <PasswordForm updateUserInformation={updateUserInformation} />
-                            <button className="w-[97%] bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+                            <button onClick={deletUser} className="w-[97%] bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
                                 Delete Account
                             </button>
                             <button onClick={() => navigate("/")} className="w-[97%] mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
