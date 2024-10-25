@@ -2,8 +2,11 @@ import React from 'react'
 import NameEditForm from '../components/NameEditForm'
 import EmailEditForm from '../components/EmailEditForm'
 import PasswordForm from '../components/PasswordFrom'
+import { useNavigate } from 'react-router-dom'
+
 
 const ProfilePage = () => {
+    const navigate = useNavigate();
     return (
         <>
             <div className='min-h-dvh'>
@@ -20,8 +23,11 @@ const ProfilePage = () => {
                             <NameEditForm />
                             <EmailEditForm />
                             <PasswordForm />
-                            <button class="w-full bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+                            <button class="w-[97%] bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
                                 Delete Account
+                            </button>
+                            <button onClick={()=>navigate("/")} class="w-[97%] mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                Back
                             </button>
                         </div>
                     </div>
