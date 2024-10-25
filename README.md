@@ -1,8 +1,11 @@
 # React + Vite
+Installation
+1. Clone the repository:
+    - git clone https://github.com/Satyam9993/G6_Frontend.git
+    - cd G6_Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2. Install dependencies:
+    - npm install
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+4. Start Server Locally
+    - npm run dev
