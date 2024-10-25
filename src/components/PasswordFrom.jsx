@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { FaEdit } from 'react-icons/fa'; // Importing edit icon
+import { CiEdit } from "react-icons/ci";
 
 // Validation schema using Yup
 const PasswordSchema = Yup.object().shape({
@@ -20,7 +20,7 @@ const PasswordForm = () => {
       validationSchema={PasswordSchema}
       onSubmit={(values) => {
         console.log(values);
-        setIsEditing(false); // Disable editing after submission
+        setIsEditing(false);
       }}
     >
       {({ errors, touched, handleSubmit, handleReset }) => (
@@ -39,9 +39,9 @@ const PasswordForm = () => {
                     type="password"
                     value="******"
                   />
-                  <FaEdit
-                    className="ml-2 cursor-pointer text-gray-600"
-                    onClick={() => setIsEditing(true)} // Enable editing on click
+                  <CiEdit
+                    className="ml-2 cursor-pointer text-gray-800"
+                    onClick={() => setIsEditing(true)}
                   />
                 </>
               ) : (
