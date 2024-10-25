@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoginPage from './pages/LoginPage.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage.jsx';
 import ProtectedRoute from './assets/utils/ProtectedRoute.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
+import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const token = useSelector(state => state.user.token);
+  console.log(token);
+  
   return (
     <>
     {/* <Login/> */}
     <Router>
       <Routes>
         {/* Public Pages */}
-        <Route path="/register" element={<RegisterPage setAuth={setIsAuthenticated} />} />
-        <Route path="/login" element={<LoginPage setAuth={setIsAuthenticated} />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage  />} />
         <Route
           path="/"
           element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <ProtectedRoute isAuthenticated={!!token}>
               <HomePage />
             </ProtectedRoute>
           }
@@ -27,13 +33,14 @@ const App = () => {
         <Route
           path="/profile"
           element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
+            <ProtectedRoute isAuthenticated={!!token}>
               <ProfilePage />
             </ProtectedRoute>
           }
         />
       </Routes>
     </Router>
+    <ToastContainer />
     </>
   )
 }

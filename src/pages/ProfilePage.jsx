@@ -23,10 +23,10 @@ const ProfilePage = () => {
                             <NameEditForm />
                             <EmailEditForm />
                             <PasswordForm />
-                            <button class="w-[97%] bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
+                            <button className="w-[97%] bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
                                 Delete Account
                             </button>
-                            <button onClick={()=>navigate("/")} class="w-[97%] mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                            <button onClick={()=>navigate("/")} className="w-[97%] mt-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                                 Back
                             </button>
                         </div>

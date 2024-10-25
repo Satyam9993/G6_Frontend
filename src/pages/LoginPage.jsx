@@ -3,7 +3,6 @@ import LoginForm from '../components/LoginForm.jsx';
 import Register from '../components/Register.jsx';
 
 const LoginPage = () => {
-    const token = false;
     return (
         <>
             <div className="bg-yellow-300 flex justify-center items-center h-screen">
