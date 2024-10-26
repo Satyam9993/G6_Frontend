@@ -1,10 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { UserIcon } from '@heroicons/react/24/solid';
-import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom'
+import { ArrowRightEndOnRectangleIcon, UserIcon } from '@heroicons/react/24/solid';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDeleteUser } from '../store/userSlice';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
     const username = useSelector(state => state.user.username);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const logoutButton = () => {
+        toast.success("Logout Successfully");
+        dispatch(setDeleteUser());
+        navigate("/login")
+    };
     return (
         <>
             <header className="text-gray-800 body-font">
@@ -24,6 +33,10 @@ const Navbar = () => {
                         <h3 className='mr-1 text-gray-500 font-bold'>Hi👋, {username || "Tom"} </h3>
                         <UserIcon className='size-6 text-gray-600' />
                     </Link>
+                    <button className="ml-4 flex" onClick={logoutButton}>
+                        <h3>Logout</h3>
+                        <ArrowRightEndOnRectangleIcon className='size-7' />
+                    </button>
                 </div>
             </header>
         </>
