@@ -1,4 +1,4 @@
-# React + Vite
+# React App
 Installation
 1. Clone the repository:
     - git clone https://github.com/Satyam9993/G6_Frontend.git
