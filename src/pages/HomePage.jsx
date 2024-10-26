@@ -27,7 +27,8 @@ const HomePage = () => {
           dispatch(setUserInfo({
             userId: userData.user._id,
             email : userData.user.email,
-            username : userData.user.username
+            username : userData.user.username,
+            description : userData.user.description
           }));
         } else {
           toast.error(userData.message);

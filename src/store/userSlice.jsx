@@ -5,6 +5,7 @@ const initialState = {
   userId: "",
   email: "",
   token: "",
+  description:""
 };
 const userSlice = createSlice({
   name: "userSlcie",
@@ -19,16 +20,15 @@ const userSlice = createSlice({
       
       state.userId = action.payload.userId;
       state.email = action.payload.email;
-      state.username = action.payload.username; 
-    },
-    setUserName: (state, action) => {
-      state.username = action.payload.username; 
+      state.username = action.payload.username;
+      state.description = action.payload.description;
     },
     setDeleteUser: (state, action) => {
       state.userId = "";
       state.email = "";
       state.username = "Tom"
-      state.token = ""
+      state.token = "",
+      state.description = ""
     }
   },
 });

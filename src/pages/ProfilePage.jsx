@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDeleteUser, setUserInfo } from '../store/userSlice'
+import UserDescription from '../components/UserDescription'
 
 
 const ProfilePage = () => {
@@ -38,6 +39,30 @@ const ProfilePage = () => {
         }
     };
 
+    const updateUserDescription = async (body) => {
+        if (!token) {
+            toast.error("Not Autorized!");
+            return;
+        }
+        const response = await fetch(`${BACKEND_URL}/updatedescription`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": token
+            },
+            body: JSON.stringify(body)
+        });
+
+        const userData = await response.json();
+
+        if (userData.success) {
+            toast.success(userData.message);
+            await fetchUserInfo();
+        } else {
+            toast.error(userData.message);
+        }
+    };
+
     const fetchUserInfo = async () => {
         try {
             const response = await fetch(`${BACKEND_URL}/getuserinfo`, {
@@ -51,12 +76,12 @@ const ProfilePage = () => {
             const userData = await response.json();
 
             if (userData.success) {
-                console.log(userData.user.email);
 
                 dispatch(setUserInfo({
                     userId: userData.user._id,
                     email: userData.user.email,
-                    username: userData.user.username
+                    username: userData.user.username,
+                    description : userData.user.description
                 }));
             } else {
                 toast.error(userData.message);
@@ -110,6 +135,7 @@ const ProfilePage = () => {
                             <NameEditForm updateUserInformation={updateUserInformation} />
                             <EmailEditForm updateUserInformation={updateUserInformation} />
                             <PasswordForm updateUserInformation={updateUserInformation} />
+                            <UserDescription updateUserDescription={updateUserDescription} />
                             <button onClick={deletUser} className="w-[97%] bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded">
                                 Delete Account
                             </button>
