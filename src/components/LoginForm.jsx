@@ -7,7 +7,7 @@ import { setToken } from '../store/userSlice';
 import { toast } from 'react-toastify';
 
 const LoginForm = () => {
-  const BACKEND_URL = "http://localhost:8080/api/v1";
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,13 +32,15 @@ const LoginForm = () => {
           }
         );
         const login = await data.json();
-        if (login) {
+        if (login.success) {
           dispatch(setToken({
             userId: login.userId,
             token: login.token
           }));
           navigate("/");
           toast.success("Successfully logged In");
+        }else{
+          toast.error("Invalid Crudentials");
         }
       } catch (error) {
         toast.error(error.message);
